@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支持 · 小当时 Littlewhen</title>
+<meta name="description" content="小当时的常见问题、联系方式与自建服务器说明。">
+<link rel="icon" href="assets/littlewhen-favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/littlewhen-icon-180.png">
+<meta property="og:title" content="小当时 Littlewhen">
+<meta property="og:image" content="https://zhchxiao123.github.io/littlewhen/assets/littlewhen-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/littlewhen-favicon.svg" alt="">小当时<small>Littlewhen</small></a>
+    <nav><a href="index.html">首页</a><a href="index.html#selfhost">自建</a><a href="privacy.html" class="optional">隐私</a><a href="terms.html" class="optional">条款</a></nav>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="wrap">
+    <h1>支持</h1>
+    <p class="meta">先看常见问题；没有答案就到 GitHub Issues 提一条。请不要贴出记录正文、口令、恢复短语或 Token。</p>
+
+    <h2>联系</h2>
+    <ul>
+      <li>问题、建议与求助：在 <a href="https://github.com/zhchxiao123/littlewhen/issues">GitHub Issues</a> 新建一条。请不要贴出密码、恢复短语或私密正文。</li>
+      <li>服务器相关的问题（打不开、登录不了、容量满了）请先联系你的服务器管理员；如果服务器是你自己部署的，看下面的「自建服务器」。</li>
+    </ul>
+
+    <h2>常见问题</h2>
+
+    <h3>记录与同步</h3>
+    <details><summary>不登录能用吗？</summary><p>可以，而且功能完整。记录先写进这台设备的加密资料库，不登录、没有网络都能记。想在 Mac 与 iPhone 之间同步，需要连上一台你自己的服务器。</p></details>
+    <details><summary>Mac 和 iPhone 怎么用同一个记忆库？</summary><p>两端在「设置 › 账号与同步」填同一个服务器地址、登录同一账号，就会同步普通记录与附件；保险箱密文也同步，但需要在新设备上用口令、恢复短语或由已解锁设备扫码授权后才能解开。</p></details>
+    <details><summary>离线写的内容什么时候上传？</summary><p>连上服务器后自动完成同步。本机副本不等于云端已备份，重要内容请定期导出。</p></details>
+
+    <h3>保险箱</h3>
+    <details><summary>忘了保险箱口令怎么办？</summary><p>用 24 词恢复短语重设口令，或在仍处于解锁状态的另一台设备上扫码授权。口令、恢复短语和所有已解锁设备都不可用时，内容无法恢复，开发者和服务器管理员都无法代为解密。</p></details>
+    <details><summary>服务器能看到保险箱里的什么？</summary><p>只有元数据：记录 ID、时间的天粒度、密文体积、附件密文哈希与体积等。正文、标签、附件、转写都是密文。详见<a href="privacy.html#vault">隐私政策</a>。</p></details>
+    <details><summary>保险箱内容会被 AI 回想或 Agent 用到吗？</summary><p>不会。保险箱内容永不参与「问一问」，面板会显示被排除的条数；通过 API 与 MCP 接入的 Agent 也拿不到保险箱内容。</p></details>
+
+    <h3>问一问 · AI 回想</h3>
+    <details><summary>为什么只有回想卡，没有总结和洞察？</summary><p>总结、洞察与回答需要模型，应用不自带。到「设置 › AI 回想」选一个来源：本机模型（Mac 上的 Ollama）、自带密钥（填你自己的 API Key），或服务器提供（你的服务器管理员配置好的模型）。回想卡与建议问题是本机统计，不需要模型。</p></details>
+    <details><summary>怎么关掉某一类卡片？</summary><p>「设置 › AI 回想 › 在“问一问”里显示」下，回想卡、总结卡、洞察卡、建议问题各自独立开关。关掉的就不会生成。</p></details>
+    <details><summary>回答会写进我的记录吗？</summary><p>不会。会话单独保存，不写入记录；助手起草的「记一条提醒」「存为记录」都要你点「保存到记录」才入库。</p></details>
+
+    <h3>Agent 授权</h3>
+    <details><summary>怎么让 Claude 或 ChatGPT 读我的记录？</summary><p>「设置 › Agent 授权」里创建一个 Token，可选只读、可限定分类。MCP 地址是你的服务器地址加 <code>/mcp</code>，请求头填 <code>Authorization: Bearer &lt;你的 Token&gt;</code>。应用内有 Claude Code、Claude Desktop、ChatGPT 的逐步说明。</p></details>
+    <details><summary>Token 泄露了怎么办？</summary><p>在「Agent 授权」里立即吊销，再创建新的。Token 只在创建时显示一次，只粘贴到客户端的请求头或访问令牌栏，不要写进聊天内容。</p></details>
+
+    <h3>导出、导入与删除</h3>
+    <details><summary>怎么把全部内容带走？</summary><p>「设置 › 导出全部」。ZIP 包含 Markdown、完整记录数据与原始附件；PDF 适合打印与分享。保险箱内容需要单独解锁并确认后才会以明文导出。</p></details>
+    <details><summary>能从别的应用导入吗？</summary><p>支持 Day One 的 JSON 导出包、Journey 导出包与 Markdown 目录（请先解压并保留照片的相对位置）。</p></details>
+    <details><summary>怎么删除账号？</summary><p>「设置 › 账号与同步 › 删除云端账号」，删除的是你在这台服务器上的账号和数据。删除前请先导出本机副本；详见<a href="privacy.html#delete">隐私政策</a>。</p></details>
+
+    <h3>自建服务器</h3>
+    <details><summary>服务端怎么部署？</summary><p>一个容器或一个二进制即可：<code>RM_BASE_PATH=/reminis docker compose up --build -d</code>，配好 HTTPS 后，在应用「设置 › 账号与同步」里填入你的服务器地址。反向代理（Caddy / Nginx / Traefik）、备份与监控的文档随<a href="https://github.com/zhchxiao123/reminis">源码</a>提供。</p></details>
+    <details><summary>家里人也想用，怎么加账号？</summary><p>服务器默认关闭公开注册。管理员可以在服务器的管理后台创建账号，或者签发邀请码，让家人在应用里用「使用邀请注册」自己注册。每个账号的资料互相独立。</p></details>
+    <details><summary>怎么让服务器提供 AI 模型？</summary><p>在服务器上配置 <code>RM_AI_PROVIDER</code>、<code>RM_AI_ENDPOINT</code>、<code>RM_AI_MODEL</code> 和 <code>RM_AI_API_KEY</code>，再用管理员接口给需要的账号设置 AI 预算（见源码里的服务端文档）。之后应用里选「服务器提供」即可，不用在每台设备上填 Key。</p></details>
+
+    <h2>报告问题时请附上</h2>
+    <ul>
+      <li>设备与系统版本、应用版本（设置 › 服务与支持）、服务端版本。</li>
+      <li>发生了什么、期望是什么、能否复现。</li>
+      <li><b>不要</b>附上记录正文、附件、口令、恢复短语或 Token。</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 zhchxiao123</span>
+    <nav><a href="https://github.com/zhchxiao123/reminis">源码</a><a href="support.html">支持</a><a href="privacy.html">隐私政策</a><a href="terms.html">使用条款</a></nav>
+  </div>
+</footer>
+</body>
+</html>
